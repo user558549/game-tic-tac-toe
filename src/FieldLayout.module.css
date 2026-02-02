@@ -1,0 +1,124 @@
+.field {
+	width: 500px;
+	height: 500px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	display: grid;
+	grid-template-columns: repeat(3, 100px);
+	grid-template-rows: repeat(3, 100px);
+	justify-content: center;
+	align-content: center;
+	gap: 12px;
+	padding: 30px;
+	border-radius: 20px;
+	box-shadow:
+		0 20px 40px rgba(0, 0, 0, 0.2),
+		inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	position: relative;
+	overflow: hidden;
+	margin: auto;
+}
+
+/* Декоративный элемент */
+.field::before {
+	content: "";
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+	background-size: 30px 30px;
+	animation: moveBackground 20s linear infinite;
+	z-index: 0;
+}
+
+@keyframes moveBackground {
+	0% {
+		transform: translate(0, 0) rotate(0deg);
+	}
+	100% {
+		transform: translate(30px, 30px) rotate(360deg);
+	}
+}
+
+.btn {
+	width: 100px;
+	height: 100px;
+	margin: 0;
+	padding: 0;
+	font-size: 48px;
+	font-weight: bold;
+	border: none;
+	border-radius: 15px;
+	background: rgba(255, 255, 255, 0.95);
+	box-shadow:
+		0 8px 16px rgba(0, 0, 0, 0.1),
+		inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+.btnnewgame {
+	background: linear-gradient(135deg, #0bd41c, #39db07);
+	color: white;
+	width: 10rem;
+	height: 3rem;
+	font-weight: 700;
+	font-size: 1.2rem;
+	margin-top: 20px;
+	cursor: pointer;
+	border: none;
+	border-radius: 10px;
+	margin-left: 45rem;
+}
+.btnnewgame:hover {
+	opacity: 0.8;
+	animation: pulseWin 1.5s infinite;
+}
+.btnnewgame:active {
+	transform: translateY(-2px) scale(0.98);
+	transition: all 0.1s;
+}
+/* Эффект при наведении */
+.btn:hover:not(:disabled) {
+	transform: translateY(-5px) scale(1.05);
+	box-shadow:
+		0 15px 25px rgba(0, 0, 0, 0.15),
+		inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+	background: white;
+}
+
+/* Эффект при нажатии */
+.btn:active:not(:disabled) {
+	transform: translateY(-2px) scale(0.98);
+	transition: all 0.1s;
+}
+
+/* Подсветка выигрышной комбинации */
+.winning {
+	animation: pulseWin 1.5s infinite;
+	background: linear-gradient(135deg, #fff9c4, #ffeb3b);
+}
+
+.draw {
+	animation: pulseWin 1.5s infinite;
+	background: linear-gradient(135deg, #0bd41c, #39db07);
+}
+@keyframes pulseWin {
+	0%,
+	100% {
+		box-shadow:
+			0 0 0 0 rgba(255, 193, 7, 0.7),
+			0 8px 16px rgba(0, 0, 0, 0.1);
+	}
+	50% {
+		box-shadow:
+			0 0 0 15px rgba(255, 193, 7, 0),
+			0 15px 25px rgba(0, 0, 0, 0.15);
+	}
+}

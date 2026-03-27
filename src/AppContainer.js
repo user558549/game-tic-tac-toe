@@ -18,18 +18,58 @@ export const AppContainer = () => {
 	const [isGameEnded, setIsGameEnded] = useState(false);
 	const [isDraw, setIsDraw] = useState(false);
 	const [field, setField] = useState(["", "", "", "", "", "", "", "", ""]);
+	const [indexWin, setIndexWin] = useState(null);
+
+	const startNewGame = () => {
+		setCurrentPlayer("X");
+		setIsGameEnded(false);
+		setIsDraw(false);
+		setField(["", "", "", "", "", "", "", "", ""]);
+		setIndexWin(null);
+	};
+
+	const check = (arg) => {
+		for (const arr of WIN_PATTERNS) {
+			const [a, b, c] = arr;
+			if (arg[a] && arg[a] === arg[b] && arg[a] === arg[c]) {
+				return arr;
+			}
+		}
+	};
+
+	function change(idx) {
+		if (
+			field[idx] !== "" ||
+			isDraw === true ||
+			(isDraw === false && isGameEnded === true)
+		) {
+			return;
+		}
+
+		let arr = [...field];
+		arr[idx] = currentPlayer;
+		setField(arr);
+		const result = check(arr);
+		if (result) {
+			setIsGameEnded(true);
+			setIndexWin(result);
+			return;
+		}
+		if (!result && !arr.includes("")) {
+			setIsDraw(true);
+		}
+		setCurrentPlayer((prev) => (prev === "X" ? "O" : "X"));
+	}
 
 	return (
 		<AppLayout
 			currentPlayer={currentPlayer}
-			setCurrentPlayer={setCurrentPlayer}
-			isGameEnded={isGameEnded}
-			setIsGameEnded={setIsGameEnded}
 			isDraw={isDraw}
-			setIsDraw={setIsDraw}
 			field={field}
-			setField={setField}
-			WIN_PATTERNS={WIN_PATTERNS}
+			indexWin={indexWin}
+			isGameEnded={isGameEnded}
+			startNewGame={startNewGame}
+			change={change}
 		/>
 	);
 };

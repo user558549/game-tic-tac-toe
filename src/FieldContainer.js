@@ -9,14 +9,9 @@ export const FieldContainer = (props) => {
 	);
 };
 FieldContainer.propTypes = {
-	currentPlayer: PropTypes.string,
-	setCurrentPlayer: PropTypes.func,
-	isGameEnded: PropTypes.bool,
-	setIsGameEnded: PropTypes.func,
 	isDraw: PropTypes.bool,
-	setIsDraw: PropTypes.func,
 	field: PropTypes.array,
-	setField: PropTypes.func,
-	WIN_PATTERNS: PropTypes.array,
 	indexWin: PropTypes.array,
+	change: PropTypes.func.isRequired,
+	startNewGame: PropTypes.func.isRequired,
 };
